@@ -31,15 +31,10 @@ router.get('/',async(req,res)=>{
 router.get('/data',async(req,res)=>{
 	try{	
 		let data=require('../index.js')
-		if(isEmptyObject(data.data)){
-			res.json({success: true,data})
-		}else{
-			data={
-				'fan':"false",
-				'auto':"false"
-			}
-			res.json({success: true,data})
-		}
+	
+		
+		res.json({success: true,data})
+		
 		
 	}catch(error){
 		res.status(500).json({success:false, message: 'nodata'})
@@ -47,14 +42,7 @@ router.get('/data',async(req,res)=>{
 })
 
 
-function isEmptyObject(obj) {
-  for (var key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      return false;
-    }
-  }
-  return true;
-}
+
 /*router.post('/', async(req,res)=>{
 
 	try{
