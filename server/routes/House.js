@@ -31,7 +31,15 @@ router.get('/',async(req,res)=>{
 router.get('/data',async(req,res)=>{
 	try{	
 		let data=require('../index.js')
-		res.json({success: true,data})
+		if(data==""){
+			res.json({success: true,data})
+		}else{
+			data={
+				'fan':"null"
+			}
+			res.json({success: true,data})
+		}
+		
 	}catch(error){
 		res.status(500).json({success:false, message: 'nodata'})
 	}
