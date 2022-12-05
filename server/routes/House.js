@@ -12,11 +12,15 @@ router.get('/',async(req,res)=>{
 		const itensity=req.query.itensity
 		const fan=req.query.fan
 		const rain=req.query.rain
+		const temp=req.query.temp
+		const humidity=req.query.humidity
 
 		const data={
 			'itensity':parseFloat(itensity,0),
 			'fan':fan,
-			'rain':rain
+			'rain':rain,
+			'temp':temp,
+			'humidity':humidity
 		}
 		
 		io.emit('HouseData',data)
