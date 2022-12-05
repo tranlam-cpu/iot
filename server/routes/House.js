@@ -35,7 +35,8 @@ router.get('/data',async(req,res)=>{
 			res.json({success: true,data})
 		}else{
 			data={
-				'fan':"null"
+				'fan':"false",
+				'auto':"false"
 			}
 			res.json({success: true,data})
 		}
