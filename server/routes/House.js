@@ -31,7 +31,7 @@ router.get('/',async(req,res)=>{
 router.get('/data',async(req,res)=>{
 	try{	
 		let data=require('../index.js')
-		if(data==""){
+		if(isEmptyObject(data.data)){
 			res.json({success: true,data})
 		}else{
 			data={
@@ -45,6 +45,15 @@ router.get('/data',async(req,res)=>{
 	}
 })
 
+
+function isEmptyObject(obj) {
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      return false;
+    }
+  }
+  return true;
+}
 /*router.post('/', async(req,res)=>{
 
 	try{
