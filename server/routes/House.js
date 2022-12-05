@@ -6,14 +6,22 @@ setTimeout(()=>{
 	io=require('../socket.js').get()
 },1000)
 
-
+/*http://localhost:5000/api/house?itensity=3&fan=true&lamp=true*/
 router.get('/',async(req,res)=>{
 	try{
 		const itensity=req.query.itensity
-		console.log(itensity);
-		io.emit('HouseData',parseFloat(itensity,0))
+		const fan=req.query.fan
+		const lamp=req.query.lamp
 
-		res.json({success: true,message:parseFloat(itensity,0)})
+		const data={
+			'itensity':parseFloat(itensity,0),
+			'fan':fan,
+			'lamp':lamp
+		}
+		
+		io.emit('HouseData',data)
+
+		res.json({success: true,data:data})
 	}catch(error){
 		console.log(error);
 		res.status(500).json({success:false, message: error})
