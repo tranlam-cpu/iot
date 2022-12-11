@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router()
-
+const requestPromise = require('request-promise');
 const esp32 = require('../models/esp32')
 let io
 setTimeout(()=>{
@@ -95,6 +95,78 @@ router.get('/chart',async(req,res)=>{
 
 })
 
+const getCurrentJson=(data)=>{
+	const messtext=`bả nói nhiệt độ là ${data.main.temp} ℃`;
+	const messtext2=`em cảm thấy bầu trời hôm nay ${data.weather[0].main}... ${data.weather[0].description}😚`;
+
+	let imgUrl=`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+	return{
+		messages:[
+			{text: messtext},
+			{attachment:{
+				type:'image',
+				payload:{
+					url:imgUrl
+				}
+			}},
+			{text:messtext2}
+		]
+	}
+}
+
+const failCurrentJson=()=>{
+	const messtext='hàng xóm bảo không biết 😑';
+	let imgUrl='https://i.pinimg.com/originals/b1/9b/7e/b19b7e48f4d0376da0c3fc94727a68ee.jpg';
+	return{
+		messages:[
+			{text: messtext},
+			{attachment:{
+				type:'image',
+				payload:{
+					url:imgUrl
+				}
+			}},
+		]
+	}
+}
+
+router.get('/bot',async(req,res)=>{
+	try{
+		const city=req.query.city;
+
+		const check=city.split(' ');
+		
+		if(check.length>1){
+			const Url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=cee343d33e41970dd63c44b39c8620ab`;
+			const reqOption={
+				url: Url,
+				json:true
+			};
+
+			requestPromise(reqOption)
+			.then((data)=>{
+				const resData=getCurrentJson(data)
+				res.status(200).json(resData)
+			})
+			.catch((error)=>{
+				const resData=failCurrentJson()
+				res.status(200).json(resData)
+			})
+		}else{
+			const resData=failCurrentJson()
+			res.status(200).json(resData)
+		}
+
+		
+
+
+	}catch(error){
+		
+		res.status(500).json({success:false, message: "nodata"})
+	}
+	
+
+})
 /*router.post('/', async(req,res)=>{
 
 	try{
