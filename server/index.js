@@ -8,6 +8,7 @@ const authRouter = require('./routes/auth')
 
 const connectDB = async ()=>{
     try{
+        mongoose.set('strictQuery', true);
         await mongoose.connect(`mongodb+srv://admin:admin@cluster0.ohm2udb.mongodb.net/?retryWrites=true&w=majority`,{
             useNewUrlParser: true,
             useUnifiedTopology: true
@@ -48,6 +49,7 @@ io.on('connection',(socket)=>{
         module.exports=data;
     })
 
+ 
 
     socket.on('disconnect',()=>{
         console.log('client disconnect');

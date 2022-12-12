@@ -15,12 +15,14 @@ router.get('/',async(req,res)=>{
 		const rain=req.query.rain
 		const temp=req.query.temp
 		const humidity=req.query.humidity
+		const lamp=req.query.lamp
 
 		const data={
 			'itensity':parseFloat(itensity,0),
 			'fan':fan,
 			'rain':rain,
 			'temp':temp,
+			'lamp':lamp,
 			'humidity':humidity
 		}
 
@@ -166,6 +168,92 @@ router.get('/bot',async(req,res)=>{
 	}
 	
 
+})
+
+const getCurrentTemp=(data)=>{
+	const messtext=`nhà mình đang ${data[0].nhietdo} ℃ anh ạ`;
+	
+	let t=data[0].nhietdo;
+	let messtext2='👌😊';
+	let imgUrl='https://i.kym-cdn.com/photos/images/original/000/967/202/eb1.jpg'
+	if(t>34){
+		messtext2='mai sắm máy lạnh anh nhé.. 👉👈';
+		imgUrl=`https://st.quantrimang.com/photos/image/2017/06/05/anh-che-nong-14.jpg`;
+	}else if(t<20){
+		messtext2='so cold..';
+		imgUrl='https://cdn1.hoanghamobile.com/tin-tuc/wp-content/uploads/2018/01/winter-meme-generator-59d89e9f997fe.jpg';
+	}
+
+	
+	return{
+		messages:[
+			{text: messtext},
+			{text: messtext2},
+			{attachment:{
+				type:'image',
+				payload:{
+					url:imgUrl
+				}
+			}}
+		]
+	}
+}
+
+router.get('/nhietdo',async(req,res)=>{
+	try{
+		const data=await esp32.find().sort({createdAt:-1}).limit(1).select('nhietdo');
+		const resData=getCurrentTemp(data)
+		
+		res.status(200).json(resData)
+	}catch(error){
+		res.status(500).json({success:false, message: "nodata"})
+	}
+})
+
+
+let statuslamp='';
+
+router.get('/lamp',async(req,res)=>{
+	try{
+		const lamp=req.query.lamp;
+
+		if(lamp===statuslamp){
+			let messtext='có bật đâu mà kiu tắt???';
+			if(lamp=='true'){
+				messtext='bật rồi mà kiu bật nửa là sao??';
+			}
+			return res.status(200).json({messages:[{text: messtext}]})
+		}
+		
+		statuslamp=lamp
+		if(lamp==='true'){
+			let messtext='đèn đã được bật ạ';
+			
+			return res.status(200).json({messages:[{text: messtext}]})
+		}else{
+			let messtext='đèn đã được tắt ạ';
+			
+			return res.status(200).json({messages:[{text: messtext}]})
+		}
+		
+
+		
+
+	}catch(error){
+		return res.status(500).json({success:false, message: "nodata"})
+	}
+})
+
+router.get('/getlamp',async(req,res)=>{
+	try{
+		
+		
+
+		res.status(200).json({success:true,statuslamp})
+
+	}catch(error){
+		res.status(500).json({success:false, message: "nodata"})
+	}
 })
 /*router.post('/', async(req,res)=>{
 
