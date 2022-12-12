@@ -45,6 +45,34 @@ router.get('/',async(req,res)=>{
 	}
 })
 
+
+router.get('/dropdata',async(req,res)=>{
+	try{
+
+		const password=req.query.password
+
+		if(password==="lamadmin"){
+			const query=await esp32.find().sort({createdAt:-1}).limit(10);
+			let messtext='csdl đang trống ạ';
+			if(query.length>1){
+
+				await esp32.remove()
+				messtext='nhiệm vụ đã hoàn thành.. csdl bay màu 🤭';
+
+				return	res.json({messages:[{text: messtext}]})
+			}
+
+
+			return res.json({messages:[{text: messtext}]})
+		}
+
+		return res.json({messages:[{text: 'không nhé !!!'}]})
+	}catch(error){
+		
+		res.status(500).json({success:false, message: error})
+	}
+})
+
 router.get('/data',async(req,res)=>{
 	try{	
 		let data=require('../index.js')
@@ -62,7 +90,7 @@ router.get('/chart',async(req,res)=>{
 	try{
 		const query=await esp32.find().sort({createdAt:-1}).limit(10);
 
-		if(!query){
+		if(query.length<1){
 			return	res.status(400).json({success:false, message: 'nodata'})
 		}
 
