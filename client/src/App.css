@@ -1,0 +1,323 @@
+
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  overflow: hidden;
+  font-family: monospace;
+  position: relative;
+  overflow-y: auto;
+}
+canvas {
+  position: absolute;
+  right: 0;
+  max-width: 75%;
+  float: right;
+  max-height: 92.5%;
+  display: block;
+
+}
+.settings{
+  position: absolute;
+  height: 50px;
+  width: 500px;
+  right: 2em;
+  bottom: 5em;
+ 
+}
+.hidden{
+    width: 0;
+    -webkit-transition: width 1s ease-in-out;
+    -moz-transition: width 1s ease-in-out;
+    -o-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;
+}
+.show{
+  -webkit-transition: width 1s ease-in-out;
+    -moz-transition: width 1s ease-in-out;
+    -o-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;
+  width: 80%;
+}
+.settings .left{
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 20px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  justify-content: space-around;
+
+  position: absolute;
+  right: 8em;
+  background: whitesmoke;
+  height: 100%;
+  max-width: 80%;
+  min-width: 0px;
+  float: right;
+
+}
+.settings .left div{
+  margin-top: 1em;
+  display: none;
+
+}
+.settings{
+  z-index: 1;
+}
+.settings .right{
+  
+  text-align: center;
+  justify-content: center;
+  position: absolute;
+  right: 1em;
+  height: 100%;
+  float: right;
+  width: 20%;
+}
+.right button{
+  margin-top: 0.5em;
+}
+.navbar-brand{
+  
+  font-size: 20px;
+  font-weight: bold;
+}
+.navbar{
+  background: white;
+}
+.menuleft{
+  
+  width: 25%;
+  height: 92.5%;;
+  display: flex;
+  float: left;
+  flex-direction: row;
+  position: absolute;
+}
+.sub-menu{
+  background: dimgrey;
+  height: 100%;
+  flex-basis: 15%;
+  text-align: center;
+}
+.sub-content{
+  background: ghostwhite;
+  height: 100%;
+  overflow-y: auto;
+  flex-basis: 85%;
+  display: flex;
+  padding: 1em;
+}
+.list-group a{
+ width: 40px;
+ height: 40px;
+ margin-left: 7px;
+ margin-top: 5px;
+ background: none;
+ color: white;
+ border: none;
+}
+.sub-content div{
+  width: 100%;
+}
+.header{
+  font-size: 16px;
+  font-weight: bolder;
+}
+.mid{
+  display: flex;
+  padding: 1em;
+  flex-direction: column;
+  text-align: center;
+}
+.photo{
+  height: 250px;
+  width: 250px;
+}
+.color-picker{
+  z-index: 1;
+  position: absolute;
+  top: 4.5em;
+  left: 30em;
+}
+.ob_dashboard{
+  
+  max-width: 100%;
+}
+.ob_dashboard canvas{
+  max-width: 100%;
+  max-height: 100%;
+  position: fixed;
+  z-index: -1;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.Head{
+  margin-top: 50em;
+  max-width: 100%;
+  height: 400px;
+  background: ghostwhite;
+  
+}
+.card{
+  height: 200px;
+  display: flex;
+  padding: 1em;
+  flex-direction: column;
+  margin-bottom: 2em;
+}
+.top{
+  height: 100px;
+  margin-bottom: 2em;
+}
+.Head-left{
+  float: left;
+  width: 10%;
+  height: 100%;
+  background: whitesmoke;
+  padding-left: 2em;
+}
+.Head-right{
+  float: right;
+  width: 90%;
+  padding: 2em;
+  height: 100%;
+}
+.Head-left .list-group a{
+  width: 100px;
+}
+.Head-left .list-group-item-light.list-group-item-action.active{
+  background-color: #cbd3bb;
+}
+.chart{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.chart > canvas{
+  position: initial !important;
+  max-width: 500px;
+  max-height: 300px;
+  
+}
+
+/*login*/
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.ctmain{
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YnVzaW5lc3MlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&w=1000&q=80') no-repeat center center/cover;
+  height: 100vh;
+  max-width: 100%;
+  padding: 0;
+}
+.overlay{
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+}
+.login{
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.login h1,h4{
+  color: white;
+}
+.login form{
+  width: 30%;
+  
+}
+.login form input{
+  margin-bottom: 1em;
+}
+.spinner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.shadow{
+  padding: 1em 1em;
+  font-weight: bolder;
+}
+.alertmess{
+  width: 100%;
+}
+
+.titlemenu{
+  font-size: 16px;
+  padding-top: 0.5em;
+}
+.titlename{
+  margin-right: 1em;
+}
+.tab-content{
+  width: 100%;
+  height: 100%;
+}
+.tab-pane{
+  width: 100%;
+  height: 100%;
+}
+.chart_content{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+
+}
+.Temp_avg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
